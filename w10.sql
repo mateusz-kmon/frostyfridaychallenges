@@ -22,7 +22,7 @@ create or replace stage week_10_frosty_stage
 
 
 
--- Create the stored procedureqry_id
+-- Create the stored procedure
 create or replace procedure dynamic_warehouse_data_load(stage_name string, table_name string)
   returns string
   language sql
