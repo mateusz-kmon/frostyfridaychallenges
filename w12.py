@@ -46,12 +46,13 @@ def upload_file(schema: str, table: str, uploaded_file):
     sql = f"copy into {schema}.{table} file_format = (skip_header=1, field_optionally_enclosed_by='\"') purge = true"
     try:
         results = cs.execute(sql).fetchone()
+        if (results[5]>=results[4]):
+            raise Exception(f"Copy into errors_seen: {results[5]} is greater or equal to allowable error_limit: {results[4]}")
+        return f"Your upload was a success. You uploaded {results[3]} rows."
     except snowflake.connector.errors.ProgrammingError as e:
         sql = f"rm @{schema}.%{table}"
         cs.execute(sql).fetchone()
         raise(e)
-    msg = f"Your upload was a success. You uploaded {results[3]} rows."
-    return msg
 
 
 def app_creation():
