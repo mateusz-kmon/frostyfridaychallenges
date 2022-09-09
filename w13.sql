@@ -6,7 +6,7 @@ select
 , coalesce(stock_amount, lag(stock_amount) ignore nulls over (partition by product order by date_of_check, id)) as stock_amount_filled_out
 , date_of_check
 from testing_data
-order by product, date_of_check;
+order by product, date_of_check, id;
 
 
 -- Other way
