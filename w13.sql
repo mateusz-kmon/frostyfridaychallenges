@@ -17,13 +17,13 @@ with lne_dt as (
     group by c.product, c.date_of_check
 )
 , lne_id as (
-    select c.product, c.date_of_check, c.last_non_empty_date, max(lne.id) as last_non_empty_id
+    select c.product, c.date_of_check, max(lne.id) as last_non_empty_id
     from lne_dt c
     join testing_data lne on 
             lne.product = c.product
         and lne.date_of_check between c.last_non_empty_date and c.date_of_check
         and lne.stock_amount is not null
-    group by c.product, c.date_of_check, c.last_non_empty_date
+    group by c.product, c.date_of_check
 )
 select
   testing_data.id
