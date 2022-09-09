@@ -13,9 +13,8 @@ order by product, date_of_check;
 with lne_dt as (
     select c.product, c.date_of_check, max(lne.date_of_check) as last_non_empty_date
     from testing_data c
-    left join testing_data lne on c.product=lne.product and c.date_of_check>=lne.date_of_check and lne.stock_amount is not null
+    join testing_data lne on c.product=lne.product and c.date_of_check>=lne.date_of_check and lne.stock_amount is not null
     group by c.product, c.date_of_check
-    -- order by 1,2
 )
 , lne_id as (
     select c.product, c.date_of_check, c.last_non_empty_date, max(lne.id) as last_non_empty_id
