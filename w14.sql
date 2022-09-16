@@ -4,11 +4,13 @@ select
       'country_of_residence', country_of_residence,
       'superhero_name', superhero_name,
       'superpowers',
-        case
-        when coalesce(superpower, second_superpower, third_superpower) is null
-          then array_construct(null)
-        else array_construct_compact(superpower, second_superpower, third_superpower)
-        end
+        coalesce(
+          nullif(
+              array_construct_compact(superpower, second_superpower, third_superpower)
+            , array_construct_compact(null) 
+          )
+          , array_construct(null)
+        )
     )
   ) as superhero_json
 from week_14;
