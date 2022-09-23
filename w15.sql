@@ -6,6 +6,7 @@ $$
     select max(f.index)+1
     from table(flatten(buckets)) f
     where price>=f.value
+      and array_size(buckets) between 2 and 6
 $$;
 
 
