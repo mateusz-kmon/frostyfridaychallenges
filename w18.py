@@ -82,6 +82,8 @@ _ = session.udf.register(
 
 # %%
 session.sql("select predict_pce_udf(2021)").show()
+# 116.22
 
 # %%
 session.sql("select predict_pce_udf(2024)").show()
+# 121.7
