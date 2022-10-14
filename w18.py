@@ -13,7 +13,7 @@ connection_parameters = {
    "password": "<password>",
    "warehouse": "compute_wh",
    "role": "accountadmin",
-   "database": "summit_hol",
+   "database": "frosty_friday",
    "schema": "public"
 }
 session = Session.builder.configs(connection_parameters).create()
@@ -44,6 +44,7 @@ snow_df_pce = (session.table("ECONOMY_DATA_ATLAS.ECONOMY.BEANIPA")
     .filter(col('"Indicator Name"') == 'Personal consumption expenditures (PCE)')
     .filter(col('"Frequency"') == 'A')
     .filter(col('"Date"') >= '1972-01-01')
+    .filter(col('"Date"') <= '2020-01-01')
 )
 pd_df_pce_year = snow_df_pce.select(year(col('"Date"')).alias('"Year"'), col('"Value"').alias('PCE') ).to_pandas()
 pd_df_pce_year
