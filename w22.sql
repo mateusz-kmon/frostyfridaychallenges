@@ -1,3 +1,5 @@
+--https://frostyfriday.org/2022/11/11/week-22-basic/
+
 use role sysadmin;
 
 -- Code for creating the secure view
