@@ -4,7 +4,7 @@ use role sysadmin;
 
 -- Code for creating the secure view
 create or replace secure view secure_cities as
-select uuid_string() as id, city, district 
+select uuid_string('68bdc98d-fc06-4c34-b265-90d9283a4e03', id) as id, city, district 
 from week22;
 
 grant select on view secure_cities to role rep1;
