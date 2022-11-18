@@ -42,7 +42,7 @@ from (
     from '@~/w23'
  ) 
 file_format = (format_name = ff_csv)
-on_error = continue
+on_error = skip_file
 ;
 
 -- test
