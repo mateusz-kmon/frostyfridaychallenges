@@ -1,0 +1,11 @@
+!set variable_substitution=true
+!define password = abc123
+!define db_dev = Development
+!define db_tst = Testing
+!define db_acc = Acceptance
+!define db_prd = Production
+!define warehouse_name = default_wh
+!define second_script = w30_t2.sql
+!variables
+!source w30_t1.sql
+!quit
