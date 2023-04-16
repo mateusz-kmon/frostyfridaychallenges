@@ -1,6 +1,6 @@
 -- https://frostyfriday.org/2023/04/14/week-41-basic/
 
-create or replace  procedure statement_creator()
+create or replace procedure statement_creator()
     returns Table()
     language python
     runtime_version = 3.8
@@ -15,13 +15,21 @@ from itertools import zip_longest
 
 def main(session: snowpark.Session): 
     # Your code goes here, inside the "main" handler.
-    col1 = "We Love Frosty Friday"
-    col2 = "Python Worksheets Are Very Cool"
+    data_str = """
+We Love Frosty Friday
+Python Worksheets Are Very Cool
+"""
+    lt_of_rows = [x.split() for x in data_str.split("\\n")[1:-1]]
+    lt_of_data = list(zip_longest(*lt_of_rows))
 
     dataframe = session.create_dataframe(
-        data = list(zip_longest(col1.split(), col2.split())),
-        schema=["STATEMENT1", "STATEMENT2"]
+        data = lt_of_data,
+        schema = ["STATEMENT1", "STATEMENT2"]
     )
 
     # Return value will appear in the Results tab.
-    return dataframe';
+    return dataframe
+';
+
+
+call statement_creator()
