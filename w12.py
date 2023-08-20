@@ -8,18 +8,18 @@ ctx = snowflake.connector.connect(**st.secrets["snowflake"])
 cs = ctx.cursor()
 
 
-@st.cache
+@st.cache_data
 def load_schemes():
     """
     Loads all schemes form a database starting by world (case insensitive).
     """
-    sql = """select schema_name from information_schema.schemata where schema_name ilike 'world%' order by 1"""
+    sql = """select schema_name from information_schema.schemata where schema_name ilike 'DP_%' order by 1"""
     results = cs.execute(sql).fetchall()
     out = [t[0] for t in results]
     return out
 
 
-@st.cache
+@st.cache_resource
 def load_tables_in_schema(schema_name: str):
     """
     Loades all tables from a given schema.
