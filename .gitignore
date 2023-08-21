@@ -1,5 +1,6 @@
 .streamlit/
 .vscode/
+credentials/
 .env
 Pipfile
 Pipfile.lock
